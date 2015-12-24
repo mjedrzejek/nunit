@@ -268,12 +268,12 @@ Task("PackageSource")
 Task("CreateImage")
 	.Does(() =>
 	{
-		var imageDir = "images/NUnit-" + packageVersion + "/";
-		var imageBinDir = imageDir + "bin/";
+		var currentImageDir = "images/NUnit-" + packageVersion + "/";
+		var imageBinDir = currentImageDir + "bin/";
 
-		CleanDirectory(imageDir);
+		CleanDirectory(currentImageDir);
 
-		CopyFiles(RootFiles, imageDir);
+		CopyFiles(RootFiles, currentImageDir);
 
 		CreateDirectory(imageBinDir);
 
@@ -304,60 +304,60 @@ Task("PackageZip")
   .IsDependentOn("CreateImage")
 	.Does(() =>
 	{
-		var imageDir = "images/NUnit-" + packageVersion + "/";
+		var currentImageDir = "images/NUnit-" + packageVersion + "/";
 		CreateDirectory(PACKAGE_DIR);
-		Zip(MakeAbsolute(Directory(imageDir)), File(ZIP_PACKAGE));
+		Zip(MakeAbsolute(Directory(currentImageDir)), File(ZIP_PACKAGE));
 	});
 
 Task("PackageNuGet")
   .IsDependentOn("CreateImage")
 	.Does(() =>
 	{
-		var imageDir = "images/NUnit-" + packageVersion + "/";
+		var currentImageDir = "images/NUnit-" + packageVersion + "/";
 
 		CreateDirectory(PACKAGE_DIR);
 		NuGetPack("nuget/nunit.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR
 		});
 		NuGetPack("nuget/nunitSL.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR
 		});
 		NuGetPack("nuget/nunitlite.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR
 		});
 		NuGetPack("nuget/nunitliteSL.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR
 		});
 		NuGetPack("nuget/nunit.console.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR,
 			NoPackageAnalysis = true
 		});
 		NuGetPack("nuget/nunit.runners.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR,
 			NoPackageAnalysis = true
 		});
 		NuGetPack("nuget/nunit.engine.nuspec", new NuGetPackSettings()
 		{
 			Version = packageVersion,
-			BasePath = imageDir,
+			BasePath = currentImageDir,
 			OutputDirectory = PACKAGE_DIR,
 			NoPackageAnalysis = true
 		});
