@@ -270,13 +270,8 @@ Task("PackageSource")
 Task("CreateImage")
 	.Does(() =>
 	{
-//<<<<<<< Updated upstream
-		var currentImageDir = "images/NUnit-" + packageVersion + "/";
+		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
 		var imageBinDir = currentImageDir + "bin/";
-//=======
-//		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
-//		var imageBinDir = currentImageDir + "bin\\";
-//>>>>>>> Stashed changes
 
 		CleanDirectory(currentImageDir);
 
@@ -312,11 +307,7 @@ Task("PackageZip")
   .IsDependentOn("CreateImage")
 	.Does(() =>
 	{
-//<<<<<<< Updated upstream
-		var currentImageDir = "images/NUnit-" + packageVersion + "/";
-//=======
-//		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
-//>>>>>>> Stashed changes
+		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
 		CreateDirectory(PACKAGE_DIR);
 		Zip(MakeAbsolute(Directory(currentImageDir)), File(ZIP_PACKAGE));
 	});
@@ -325,11 +316,7 @@ Task("PackageNuGet")
   .IsDependentOn("CreateImage")
 	.Does(() =>
 	{
-//<<<<<<< Updated upstream
-		var currentImageDir = "images/NUnit-" + packageVersion + "/";
-//=======
-//		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
-//>>>>>>> Stashed changes
+		var currentImageDir = IMAGE_DIR + "NUnit-" + packageVersion + "/";
 
 		CreateDirectory(PACKAGE_DIR);
 		NuGetPack("nuget/nunit.nuspec", new NuGetPackSettings()
