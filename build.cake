@@ -37,6 +37,7 @@ var AllFrameworks = IsRunningOnWindows() ? WindowsFrameworks : LinuxFrameworks;
 // Directories - Use CWD since there seems to be no defined project dir in Cake
 var PACKAGE_DIR = "package/";
 var BIN_DIR = "bin/" + configuration + "/";
+var IMAGE_DIR = "images/";
 //var CWD = Context.Environment.WorkingDirectory.FullPath + "\\";
 //var PACKAGE_DIR = CWD + "package\\";
 //var BIN_DIR = CWD + "bin\\" + configuration + "\\";
